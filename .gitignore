@@ -1,0 +1,20 @@
+# Credenciales – NUNCA subir
+credentials.json
+*.json
+!pyproject.json
+.env
+
+# Datos
+data/raw/
+data/processed/
+data/validated/
+data/reports/
+
+# Logs
+logs/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/

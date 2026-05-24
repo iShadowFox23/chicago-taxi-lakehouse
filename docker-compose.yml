@@ -1,0 +1,64 @@
+# docker-compose.yml – Chicago Taxi Lakehouse
+# Levanta: PostgreSQL 16 + pgAdmin 4 + el pipeline
+#
+# Uso completo : docker compose up --build
+# Solo BD      : docker compose up postgres pgadmin -d
+# Solo pipeline: docker compose run --rm pipeline
+
+version: "3.9"
+
+services:
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB:       chicago_taxi
+      POSTGRES_USER:     taxi_user
+      POSTGRES_PASSWORD: taxi_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./sql/create_table.sql:/docker-entrypoint-initdb.d/01_create_table.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U taxi_user -d chicago_taxi"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "8080:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  pipeline:
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      PG_HOST:     postgres
+      PG_PORT:     5432
+      PG_DB:       chicago_taxi
+      PG_USER:     taxi_user
+      PG_PASSWORD: taxi_password
+      GOOGLE_APPLICATION_CREDENTIALS: /run/secrets/gcp_creds
+    secrets:
+      - gcp_creds
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+
+secrets:
+  gcp_creds:
+    file: ./credentials.json   # tu service account JSON (en .gitignore)
+
+volumes:
+  pg_data:

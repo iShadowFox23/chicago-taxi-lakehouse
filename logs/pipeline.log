@@ -1,0 +1,37 @@
+2026-05-25 22:47:34 INFO     =======================================================
+2026-05-25 22:47:34 INFO       Iniciando etapa: CLEAN
+2026-05-25 22:47:34 INFO     =======================================================
+2026-05-25 22:47:34 INFO     Limpiando: chicago_taxi_trips2019.parquet
+2026-05-25 22:47:42 INFO       [2019] Registros iniciales: 7,283,804
+2026-05-25 22:47:48 INFO       [2019] Tras dedup: 7,056,584 (227,220 eliminados)
+2026-05-25 22:47:48 INFO       [2019] Tras filtrar trip_seconds=0: 6,909,733 (146,851 eliminados)
+2026-05-25 22:47:49 INFO       [2019] Anomalias marcadas: 866,074
+2026-05-25 22:47:51 INFO       [2019] Registros finales: 6,909,733
+2026-05-25 22:48:00 INFO       Guardado: /app/src/../data/processed/taxi_trips_2019_clean.parquet
+2026-05-25 22:48:00 INFO     Limpiando: chicago_taxi_trips2020.parquet
+2026-05-25 22:48:01 INFO       [2020] Registros iniciales: 815,519
+2026-05-25 22:48:02 INFO       [2020] Tras dedup: 815,519 (0 eliminados)
+2026-05-25 22:48:02 INFO       [2020] Tras filtrar trip_seconds=0: 791,195 (24,324 eliminados)
+2026-05-25 22:48:02 INFO       [2020] Anomalias marcadas: 104,739
+2026-05-25 22:48:02 INFO       [2020] Registros finales: 791,195
+2026-05-25 22:48:03 INFO       Guardado: /app/src/../data/processed/taxi_trips_2020_clean.parquet
+2026-05-25 22:48:03 INFO     Limpiando: chicago_taxi_trips2021.parquet
+2026-05-25 22:48:03 INFO       [2021] Registros iniciales: 79,220
+2026-05-25 22:48:03 INFO       [2021] Tras dedup: 79,220 (0 eliminados)
+2026-05-25 22:48:03 INFO       [2021] Tras filtrar trip_seconds=0: 76,870 (2,350 eliminados)
+2026-05-25 22:48:03 INFO       [2021] Anomalias marcadas: 8,815
+2026-05-25 22:48:03 INFO       [2021] Registros finales: 76,870
+2026-05-25 22:48:03 INFO       Guardado: /app/src/../data/processed/taxi_trips_2021_clean.parquet
+2026-05-25 22:48:03 INFO       Etapa 'clean' completada en 30.0s
+2026-05-25 22:48:03 INFO     Pipeline finalizado en 30.0s
+2026-05-25 22:48:17 INFO     =======================================================
+2026-05-25 22:48:17 INFO       Iniciando etapa: VALIDATE
+2026-05-25 22:48:17 INFO     =======================================================
+2026-05-25 22:48:27 INFO     Total registros a validar: 7,777,798
+2026-05-25 22:48:27 INFO     Validacion estructural: OK
+2026-05-25 22:48:33 INFO     Validos  : 7,777,798 (100.00%)
+2026-05-25 22:48:33 INFO     Rechazados: 0
+2026-05-25 22:48:43 INFO     Reporte guardado: /app/src/../data/reports/validation_report.txt
+2026-05-25 22:48:43 INFO     Dataset aprobado para carga en PostgreSQL.
+2026-05-25 22:48:43 INFO       Etapa 'validate' completada en 25.6s
+2026-05-25 22:48:43 INFO     Pipeline finalizado en 25.6s
